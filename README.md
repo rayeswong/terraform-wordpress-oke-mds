@@ -1,0 +1,1 @@
+# terraform-wordpress-oke-mds
