@@ -1,0 +1,250 @@
+title: "Wordpress on OKE with MDS"
+dscription: "Wordpress Deployment on OKE using MySQL Database Service"
+schemaVersion: 1.6.0
+version: "20210722"
+locale: "en"
+
+
+variableGroups:
+  - title: "General Configuration (Hidden)"
+    visible: false
+    variables:
+      - tenancy_ocid
+      - compartment_ocid
+      - region
+      - api_fingerprint
+      - api_private_key_path
+      - current_user_ocid
+      - ssh_private_key_path
+      - ssh_public_key
+      - ssh_public_key_path
+      - tags
+      - label_prefix
+
+  - title: Network Configuration
+    visible: true
+    variables:
+      - vcn_name
+      - vcn_cidr
+
+  - title: Network Configuration (Hidden)
+    visible: false
+    variables:
+      - vcn_dns_label
+      - availability_domains
+      - create_drg
+      - drg_display_name
+      - internet_gateway_route_rules
+      - lockdown_default_seclist
+      - nat_gateway_route_rules
+      - netnum
+      - newbits
+
+  - title: WordPress Configuration
+    visible: true
+    variables:
+      - wp_name
+      - wp_password
+      - wp_schema
+
+  - title: MySQL Data Service Configuration
+    visible: true
+    variables:
+      - mysql_db_system_admin_username
+      - mysql_db_system_admin_password
+      - mds_instance_name
+      - mysql_shape_name
+      - deploy_mds_ha
+
+  - title: MySQL Data Service Configuration (Hidden)
+    visible: false
+    variables:
+      - existing_mds_instance_ocid
+
+  - title: Kubernetes Cluster Configuration
+    visible: true
+    variables:
+      - cluster_name
+      - kubernetes_version
+      - node_pools
+      - node_pool_os
+      - node_pool_os_version
+
+  - title: Kubernetes Cluster Configuration (Hidden)
+    visible: false
+    variables:
+      - admission_controller_options
+      - allow_node_port_access
+      - allow_worker_ssh_access
+      - cluster_access
+      - cluster_access_source
+      - check_node_active
+      - dashboard_enabled
+      - node_pools_to_drain
+      - nodepool_drain
+      - nodepool_upgrade_method
+      - node_pool_name_prefix
+      - node_pool_image_id
+      - pods_cidr
+      - services_cidr
+      - use_signed_images
+      - worker_mode
+      - lb_subnet_type
+      - preferred_lb_subnets
+      - public_lb_ports
+
+
+  - title: OCIR Configuration (Hidden)
+    visible: false
+    variables:
+      - email_address
+      - ocir_urls
+      - secret_id
+      - secret_name
+      - username
+
+  - title: Calico Configuration (Hidden)
+    visible: false
+    variables:
+      - calico_enabled
+      - calico_version
+      - metricserver_enabled
+      - vpa
+
+  - title: KMS Configuration (Hidden)
+    visible: false
+    variables:
+      - use_encryption
+      - existing_key_id
+      - image_signing_keys
+
+  - title: Service Account Configuration (Hidden)
+    visible: false
+    variables:
+      - create_service_account
+      - service_account_name
+      - service_account_namespace
+      - service_account_cluster_role_binding
+
+  - title: WAF Configuration (Hidden)
+    visible: false
+    variables:
+      - waf_enabled
+
+  - title: "Bastion Configuration (Hidden)"
+    visible: false
+    variables:
+      - bastion_access
+      - bastion_enabled
+      - bastion_image_id
+      - bastion_notification_enabled
+      - bastion_notification_endpoint
+      - bastion_notification_protocol
+      - bastion_notification_topic
+      - bastion_operating_system_version
+      - bastion_package_upgrade
+      - bastion_shape
+      - bastion_state
+      - bastion_timezone
+
+  - title: "OKE Operator Configuration (Hidden)"
+    visible: false
+    variables:
+      - operator_enabled
+      - operator_image_id
+      - operator_instance_principal
+      - operator_notification_enabled
+      - operator_notification_endpoint
+      - operator_notification_protocol
+      - operator_notification_topic
+      - operator_package_upgrade
+      - operator_shape
+      - operator_timezone
+      - operator_version
+
+variables:
+  wp_name:
+    type: string
+    required: true
+    title: MySQL WordPress Username
+    description: MySQL Username for WordPress
+    minLength: 2
+    maxLength: 14
+    pattern: "^[a-zA-Z][a-zA-Z0-9]+$"
+
+  wp_password:
+    type: password
+    required: true
+    title: MySQL WordPress User's Password
+    description: MySQL Password for WordPress User
+    pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\\\"\\\\|,.<>\\/?]).{8,32}$"
+
+  wp_schema:
+    type: string
+    required: true
+    title: MySQL WordPress Schema
+    description: MySQL Schema/Database for WordPress
+
+  vcn_name:
+    type: string
+    required: true
+    title: ${Messages.solutionsHub.solutions.defaultVCN.variables.vcn_display_name.title()}
+    description: ${Messages.solutionsHub.solutions.defaultVCN.variables.vcn_display_name.description()}
+
+  vcn_cidr:
+    type: string
+    required: true
+    pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
+    title: ${Messages.solutionsHub.solutions.defaultVCN.variables.vcn_cidr.title()}
+    description: ${Messages.solutionsHub.solutions.defaultVCN.variables.vcn_cidr.description()}
+
+  mysql_db_system_admin_username:
+    type: string
+    required: true
+    title: MDS Admin Username
+    description: MySQL Database Service's admin username
+    minLength: 1
+    maxLength: 14
+    pattern: "^[a-zA-Z][a-zA-Z0-9]+$"
+
+  mysql_db_system_admin_password:
+    type: password
+    required: true
+    title: MDS Admin User's Password
+    description: Password for MySQL Database Service's admin user
+    pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\\\"\\\\|,.<>\\/?]).{8,32}$"
+
+  mds_instance_name:
+    type: string
+    required: true
+    title: MySQL Database Service Instance's name
+
+  mysql_shape_name:
+    type: string
+    required: true
+    title: "Shape for the MDS Instance"
+
+  deploy_mds_ha:
+    title: Deploy High Availability for MDS
+    type: boolean
+    default: false
+
+  cluster_name:
+    type: string
+    required: true
+    title: Kubernetes Cluster's name
+
+  kubernetes_version:
+    type: string
+    required: true
+    title: Kubernetes Version
+
+  node_pool_os:
+    type: string
+    required: true
+    title: Operating System of Worker Node
+
+  node_pool_os_version:
+    type: string
+    required: true
+    title: Operating System Version of Worker Node
