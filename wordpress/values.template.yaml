@@ -1,0 +1,18 @@
+## Blog/Site Info
+wordpressUsername: ${wp_username}
+wordpressPassword: ${wp_password}
+wordpressEmail: ${wp_email}
+wordpressFirstName: ${wp_firstname}
+wordpressLastName: ${wp_lastname}
+wordpressBlogName: ${wp_blogname}
+
+## Database Settings
+externalDatabase:
+  host: ${mds_ip}
+  user: ${mds_username}
+  password: ${mds_password}
+  database: ${wp_schema}
+
+## Disabling MariaDB
+mariadb:
+  enabled: false
