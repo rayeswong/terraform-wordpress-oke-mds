@@ -8,18 +8,18 @@ variable region { }
 
 #oke
 variable kube_cluster_name { default = "oke_cluster" }
-variable kube_version { default = "v1.19.7" }
+variable kube_version { default = "v1.20.11" }
 variable node_shape { default = "VM.Standard.E4.Flex" }
-variable node_shape_ocpus { default = 2 }
-variable node_shape_memory { default = 16 }
-variable node_pool_ssh_public_key { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJWdG31hhdxtleiKc4RHOGVAAegACmVaYXg762bKYOlk7cj8lEx3UA+xrfX06ylwsbYKUblR93U40MWU7NgUGdgLvHHvdxx+EU/EsQsNafLuWuqKFUvMABdSWY/nq918CwWA5WEmZo3taq8IR0tRa11H3aZ8HKFibqtYKrdFM5Pqovac7MCKPHSBJelnUhHIFcYm7Zw3ICMYFqL3Ht5aMijgm8izwkE2yL5OnJJx+gR+lfmUqqDi0B9+1xwkbPKXYDJMevwMO1VE05dpxdqFZ/E9Q/3CnkAFb9yXm4THv0J1/gPBF5me0L90Zto29T8k3JYihP947OwT6cL1QAITNP"}
+variable node_shape_ocpus { default = 1 }
+variable node_shape_memory { default = 8 }
+variable node_pool_ssh_public_key { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvRZ6JUfI6qGFL5Y3Ql2/9Awr3stdOTUTK2dDbvppG0f8gSACQHK6qdJkuQMESRdaTlxhBAxBxBB46C6d9v2bYSroyNhGPf3Nk2vqaV5Sg75krHqnT4UTnRaTxGj3xj6xtpBsVFABIAK7fNwrrWvza+8MLyX83rwUGlm8CPoI5a32+EUuNEiOzWnPRCtuh+rnpozyRgEQyVD/r0Y/rQIwQVrvdTn2XziIkJ8gxGn39FtswUArwuo/iJ306WXaMxYzTpVVhiw+dzKPOoCz4R0D9PsuxL3EtZeXSi8B8di2Og5caURu4E5j3lsBvUkD/mUD3JTZap9KGImVjfM7B3/zn"}
 
 #operator
 variable operator_shape { default = "VM.Standard.E4.Flex" }
-variable operator_shape_ocpus { default = 2 }
-variable operator_shape_memory { default = 16 }
-variable operator_ssh_public_key { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCJWdG31hhdxtleiKc4RHOGVAAegACmVaYXg762bKYOlk7cj8lEx3UA+xrfX06ylwsbYKUblR93U40MWU7NgUGdgLvHHvdxx+EU/EsQsNafLuWuqKFUvMABdSWY/nq918CwWA5WEmZo3taq8IR0tRa11H3aZ8HKFibqtYKrdFM5Pqovac7MCKPHSBJelnUhHIFcYm7Zw3ICMYFqL3Ht5aMijgm8izwkE2yL5OnJJx+gR+lfmUqqDi0B9+1xwkbPKXYDJMevwMO1VE05dpxdqFZ/E9Q/3CnkAFb9yXm4THv0J1/gPBF5me0L90Zto29T8k3JYihP947OwT6cL1QAITNP"}
-variable operator_ssh_private_key_path { default = "./keys/privateKey"}
+variable operator_shape_ocpus { default = 1 }
+variable operator_shape_memory { default = 8 }
+variable operator_ssh_public_key { default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvRZ6JUfI6qGFL5Y3Ql2/9Awr3stdOTUTK2dDbvppG0f8gSACQHK6qdJkuQMESRdaTlxhBAxBxBB46C6d9v2bYSroyNhGPf3Nk2vqaV5Sg75krHqnT4UTnRaTxGj3xj6xtpBsVFABIAK7fNwrrWvza+8MLyX83rwUGlm8CPoI5a32+EUuNEiOzWnPRCtuh+rnpozyRgEQyVD/r0Y/rQIwQVrvdTn2XziIkJ8gxGn39FtswUArwuo/iJ306WXaMxYzTpVVhiw+dzKPOoCz4R0D9PsuxL3EtZeXSi8B8di2Og5caURu4E5j3lsBvUkD/mUD3JTZap9KGImVjfM7B3/zn"}
+variable operator_ssh_private_key_path { default = "./keys/id_rsa"}
 variable operator_os { default = "Oracle Linux" }
 variable operator_os_version { default = "7.9" }
 
